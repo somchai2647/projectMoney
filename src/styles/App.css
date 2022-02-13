@@ -1,0 +1,11 @@
+.menuitem {
+  max-width: 13rem;
+  transition: 0.6s;
+  border-radius: 10px;
+  position: sticky;
+}
+
+/* .menuitem:hover {
+    max-width: 15rem;
+
+} */

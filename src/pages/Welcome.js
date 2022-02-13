@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import Navbar from '../components/navbar';
+import Navbar from '../components/Navbar';
 import { Button, Card, Container, Form } from 'react-bootstrap';
 import { useForm } from "react-hook-form";
 import { login, create } from '../services/auth';
+import { useNavigate } from 'react-router-dom';
 export default function Welcome() {
     const { register, handleSubmit, reset, setValue } = useForm();
-
+    const navigate = useNavigate();
     const [Loading, setLoading] = useState(false)
     const [Regis, setRegis] = useState(false)
     const [Remember, setRemember] = useState(false)
     const [Err, setErr] = useState("")
+
 
     useEffect(() => {
         if (!Regis) {
@@ -43,7 +45,6 @@ export default function Welcome() {
         setLoading(true)
         if (Regis) {
             create(email, password, password2).then(user => {
-                console.log(user)
                 handleToggleReg()
             }).catch(e => {
                 setErr("อีเมลถูกใช้งานแล้ว")
@@ -59,7 +60,7 @@ export default function Welcome() {
                 else {
                     localStorage.setItem("remember", email)
                 }
-                console.log(user)
+                navigate("/accounts")
             }).catch(e => {
                 setErr("อีเมลหรือรหัสผ่านไม่ถูกต้อง")
                 console.log(e)
@@ -73,7 +74,6 @@ export default function Welcome() {
 
     return (
         <div>
-            <Navbar />
             <Container className='mt-4 d-flex align-items-center justify-content-center'>
                 <Card style={{ width: '20rem' }} className='shadow'>
                     <Card.Img variant="top" src={Regis ? "assets/images/reg.webp" : "assets/images/login.webp"} />
