@@ -1,9 +1,11 @@
 import React from 'react';
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 
-export default function navbar() {
+export default function MyNavbar() {
+
     return (
         <div>
+
             <Navbar bg="info" variant='dark' expand="lg">
                 <Container>
                     <Navbar.Brand href="#">ระบบบันทึกรายรับ-รายจ่าย</Navbar.Brand>

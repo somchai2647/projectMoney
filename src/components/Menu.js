@@ -10,18 +10,19 @@ export default function Menu() {
     const handleMouseEnter = (title) => {
         setTitle(title)
     }
+
+    const BASEPATH = "/assets/images/button"
     return (
         <div>
             <Row className='mt-4 d-flex align-items-center justify-content-center'>
                 <Col xs="6" md="auto">
-                    <ButtonMenu src="/assets/money1.webp" to="" title="Dashboard" />
+                    <ButtonMenu src={`${BASEPATH}/dashboard.jpg`} srchover={`${BASEPATH}/dashboard_hover.jpg`} to="" title="Dashboard" />
                 </Col>
                 <Col xs="6" md="auto">
-                    <ButtonMenu src="/assets/money1.webp" to="category" title="Category" />
-
+                    <ButtonMenu src={`${BASEPATH}/category.jpg`} srchover={`${BASEPATH}/category_hover.jpg`} to="category" title="Dashboard" />
                 </Col>
                 <Col xs="6" md="auto">
-
+                    <ButtonMenu src={`${BASEPATH}/recoard.jpg`} srchover={`${BASEPATH}/recoard_hover.jpg`} to="recoard" title="Dashboard" />
                 </Col>
                 <Col xs="6" md="auto">
 
