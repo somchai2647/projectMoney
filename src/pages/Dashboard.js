@@ -4,10 +4,10 @@ import { Outlet, useParams } from "react-router-dom";
 
 export default function Dashboard() {
     const { account } = useParams();
-    console.log(account)
     return (
         <>
-            <h1>Dashboard {account}</h1>
+            {/* <img src="/assets/images/accbar1.png" style={{ width: "100%" }} /> */}
+            {/* <h1>Dashboard {account}</h1> */}
             <Menu />
             <Outlet />
         </>

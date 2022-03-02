@@ -1,9 +1,7 @@
-import { getFirestore, collection, addDoc, Timestamp, getDoc, doc, getDocs, query, where } from "firebase/firestore";
-import { getAuth } from "firebase/auth";
+import { getFirestore, collection, addDoc, Timestamp, getDocs, query, where, orderBy, getDoc, doc } from "firebase/firestore";
 import firebase from './firebase';
 
 const db = getFirestore(firebase)
-const auth = getAuth(firebase)
 
 export function addCategory(data) {
     return new Promise(async (resolve, reject) => {
@@ -20,13 +18,28 @@ export function addCategory(data) {
     })
 }
 
+export function getOne(categoryID) {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const querySnapshot = await getDoc(doc(db, "categorys", categoryID))
+
+            if (querySnapshot.exists()) resolve(querySnapshot.data())
+
+            resolve(null)
+
+        } catch (error) {
+            reject(error)
+        }
+    })
+}
+
+
 export function getCategory(accountID) {
     return new Promise(async (resolve, reject) => {
         try {
             var payload = []
-            const querySnapshot = await getDocs(query(collection(db, "categorys"), where("account", "==", accountID), where("delstatus", "==", false)))
 
-            if (querySnapshot.empty) resolve(null)
+            const querySnapshot = await getDocs(query(collection(db, "categorys"), where("account", "==", accountID), orderBy("createdDate", "desc")))
 
             querySnapshot.forEach((doc) => {
                 payload.push({ id: doc.id, ...doc.data() })
@@ -35,7 +48,9 @@ export function getCategory(accountID) {
             resolve(payload)
 
         } catch (error) {
+
             reject(error)
+            
         }
     })
 }

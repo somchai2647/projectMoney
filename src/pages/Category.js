@@ -1,4 +1,4 @@
-import { Button, Container, Badge, ListGroup } from 'react-bootstrap'
+import { Button, Container, ListGroup } from 'react-bootstrap'
 import CategoryModal from '../components/modals/AddCategory';
 import { BsFillPlusCircleFill, BsListStars } from "react-icons/bs";
 import { getCategory } from '../services/category';
@@ -38,7 +38,7 @@ export default function Category() {
                 <div style={{ marginTop: 20 }}>
                     <ListGroup defaultActiveKey="#link1">
                         {Data && Data.map((item, index) => (
-                            <ListGroup.Item action onClick={handleToggle}>
+                            <ListGroup.Item action onClick={handleToggle} key={index} style={{ height: "4rem"}}>
                                 <BsListStars /> {item.name}
                             </ListGroup.Item>
                         ))}
