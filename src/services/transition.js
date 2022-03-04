@@ -1,4 +1,4 @@
-import { getFirestore, collection, addDoc, Timestamp, getDocs, query, where, orderBy } from "firebase/firestore";
+import { getFirestore, collection, addDoc, Timestamp, limit, getDocs, query, where, orderBy } from "firebase/firestore";
 import firebase from './firebase';
 
 const db = getFirestore(firebase)
@@ -18,11 +18,15 @@ export function addTransition(data) {
     })
 }
 
-export function getTransition(accountID) {
+export function getTransition(accountID, limitmode = 0) {
     return new Promise(async (resolve, reject) => {
         try {
             var payload = []
-            const querySnapshot = await getDocs(query(collection(db, "transitions"), where("account", "==", accountID), orderBy("createdDate", "desc")))
+            const querySnapshot = await getDocs(!limitmode > 0 ?
+                query(collection(db, "transitions"), where("account", "==", accountID), orderBy("createdDate", "desc"))
+                :
+                query(collection(db, "transitions"), where("account", "==", accountID), orderBy("createdDate", "desc"), limit(limitmode))
+            )
 
             if (querySnapshot.empty) resolve(null)
 

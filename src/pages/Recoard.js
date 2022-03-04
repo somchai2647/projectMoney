@@ -4,18 +4,16 @@ import { BsFillPlusCircleFill } from "react-icons/bs";
 import React, { useEffect, useState } from 'react'
 import { getTransition, getBalance, getIncomeOutcome } from '../services/transition';
 import { useParams } from 'react-router-dom';
+import addComma3Point from '../utils/addCommaNumber';
 import Moment from 'moment'
 import "moment/locale/th";
 
-function addComma3Point(number) {
-    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
 
 const ListItem = ({ data }) => (
     <ListGroup.Item
         as="li"
         className="d-flex justify-content-between align-items-start"
-        variant={data.type == "IN" ? "success" : "danger"}
+        variant={data.type === "IN" ? "success" : "danger"}
     >
         <div className="ms-2 me-auto">
             <div className="fw-bold">{data.category}</div>
